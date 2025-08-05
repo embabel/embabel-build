@@ -145,6 +145,36 @@
                 <role>lead</role>
             </roles>
         </developer>
+        <developer>
+            <id>slimslenderslacks</id>
+            <name>Jim Clark</name>
+            <email>jclark at embabel.com</email>
+            <organization>Embabel Software, Inc.</organization>
+            <organizationUrl>https://www.embabel.com</organizationUrl>
+            <roles>
+                <role>lead</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>poutsma</id>
+            <name>Arjen Poutsma</name>
+            <email>apoutsma at embabel.com</email>
+            <organization>Embabel Software, Inc.</organization>
+            <organizationUrl>https://www.embabel.com</organizationUrl>
+            <roles>
+                <role>lead</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>jasperblues</id>
+            <name>Jasper Blues</name>
+            <email>jblues at embabel.com</email>
+            <organization>Embabel Software, Inc.</organization>
+            <organizationUrl>https://www.embabel.com</organizationUrl>
+            <roles>
+                <role>lead</role>
+            </roles>
+        </developer>
     </developers>
     <build>
         <pluginManagement>
