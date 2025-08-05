@@ -145,7 +145,14 @@
 
     <repositories>
         <repository>
-            <id>embabel-artifactory</id>
+            <id>embabel-releases</id>
+            <url>https://repo.embabel.com/artifactory/libs-release</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>embabel-snapshots</id>
             <url>https://repo.embabel.com/artifactory/libs-snapshot</url>
             <snapshots>
                 <enabled>true</enabled>
