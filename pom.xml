@@ -623,12 +623,23 @@
 
     <repositories>
         <repository>
-            <id>embabel-snapshots</id>
-            <name>Embabel Snapshots</name>
-            <url>https://repo.embabel.com/libs-snapshot</url>
+            <id>embabel-releases</id>
+            <name>Embabel Releases</name>
+            <url>https://repo.embabel.com/artifactory/libs-release/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
+        </repository>
+        <repository>
+            <id>embabel-snapshots</id>
+            <name>Embabel Snapshots</name>
+            <url>https://repo.embabel.com/artifactory/libs-snapshot/</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
         </repository>
         <repository>
             <id>spring-milestones</id>
@@ -649,6 +660,10 @@
     </repositories>
 
     <distributionManagement>
+        <repository>
+            <id>embabel-releases</id>
+            <url>https://repo.embabel.com/artifactory/libs-release/</url>
+        </repository>
         <snapshotRepository>
             <id>embabel-snapshots</id>
             <url>https://repo.embabel.com/artifactory/libs-snapshot/</url>
