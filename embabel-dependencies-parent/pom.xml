@@ -164,7 +164,7 @@
     <distributionManagement>
         <repository>
             <id>embabel-releases</id>
-            <url>https://repo.embabel.com/artifactory/libs-releases/</url>
+            <url>https://repo.embabel.com/artifactory/libs-release/</url>
         </repository>
         <snapshotRepository>
             <id>embabel-snapshots</id>
