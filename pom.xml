@@ -251,6 +251,7 @@
                         <jvmTarget>${maven.compiler.target}</jvmTarget>
                         <args>
                             <arg>-Xjsr305=strict</arg>
+                            <arg>-Xjvm-default=all</arg>
                         </args>
                         <compilerPlugins>
                             <plugin>spring</plugin>
