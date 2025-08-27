@@ -252,6 +252,7 @@
                         <args>
                             <arg>-Xjsr305=strict</arg>
                             <arg>-Xjvm-default=all</arg>
+                            <arg>-Xsuppress-warning=UNCHECKED_CAST</arg>
                         </args>
                         <compilerPlugins>
                             <plugin>spring</plugin>
