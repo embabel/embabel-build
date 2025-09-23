@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.embabel.build</groupId>
     <artifactId>embabel-build-dependencies</artifactId>
-    <version>0.1.4</version>
+    <version>0.1.5-SNAPSHOT</version>
     <name>Embabel Build BOM</name>
     <packaging>pom</packaging>
     <description>BOM with Embabel Build Dependencies</description>
