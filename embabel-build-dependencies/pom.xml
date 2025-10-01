@@ -35,6 +35,8 @@
         <!-- Swagger -->
         <swagger-annotations.version>2.2.28</swagger-annotations.version>
         <swagger-parser.version>2.1.25</swagger-parser.version>
+        <!-- Apache Tika -->
+        <tika.version>3.2.2</tika.version>
         <!-- Names Generator -->
         <moby-names-generator.version>20.10.1-r0</moby-names-generator.version>
         <!-- Unit and Integration Testing -->
@@ -215,6 +217,18 @@
                 <groupId>org.fastily</groupId>
                 <artifactId>jwiki</artifactId>
                 <version>${jwiki.version}</version>
+            </dependency>
+
+            <!-- Apache Tika for content parsing -->
+            <dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-core</artifactId>
+                <version>${tika.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tika</groupId>
+                <artifactId>tika-parsers-standard-package</artifactId>
+                <version>${tika.version}</version>
             </dependency>
 
             <!--java jna required for WinUtils -->
