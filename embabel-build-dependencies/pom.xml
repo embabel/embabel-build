@@ -37,6 +37,10 @@
         <swagger-parser.version>2.1.25</swagger-parser.version>
         <!-- Apache Tika -->
         <tika.version>3.2.2</tika.version>
+        <!-- Netty BOM -->
+        <netty-version>4.1.125.Final</netty-version>
+        <!-- Embedded Tomcat -->
+        <tomcat-embed.version>10.1.44</tomcat-embed.version>
         <!-- Names Generator -->
         <moby-names-generator.version>20.10.1-r0</moby-names-generator.version>
         <!-- Unit and Integration Testing -->
@@ -237,6 +241,33 @@
                 <artifactId>jna-platform</artifactId>
                 <version>${jna-platform.verson}</version>
             </dependency>
+
+            <!-- Embedded Tomcat Version Upgrade - High Vulnerability Report-->
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-core</artifactId>
+                <version>${tomcat-embed.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-el</artifactId>
+                <version>${tomcat-embed.version}</version>
+            </dependency>
+            
+            <!-- Netty Upgrade - High Vulnerability Report -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-bom</artifactId>
+                <version>${netty-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
+
+
+
+
 
             <!-- Names Generator -->
             <dependency>
