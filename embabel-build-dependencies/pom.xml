@@ -38,7 +38,7 @@
         <!-- Apache Tika -->
         <tika.version>3.2.2</tika.version>
         <!-- Netty BOM -->
-        <netty-version>4.1.125.Final</netty-version>
+        <netty.version>4.1.125.Final</netty.version>
         <!-- Embedded Tomcat -->
         <tomcat-embed.version>10.1.44</tomcat-embed.version>
         <!-- Names Generator -->
@@ -258,14 +258,10 @@
             <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-bom</artifactId>
-                <version>${netty-version}</version>
+                <version>${netty.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-
-
-
 
 
 
