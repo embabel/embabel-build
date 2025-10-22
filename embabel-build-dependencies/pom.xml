@@ -8,7 +8,7 @@
     <packaging>pom</packaging>
     <description>BOM with Embabel Build Dependencies</description>
     <properties>
-        <spring-boot.version>3.5.6</spring-boot.version>
+        <spring-boot.version>3.4.3</spring-boot.version>
         <!-- Kotlin Version and Compiler -->
         <kotlin.version>2.1.10</kotlin.version>
         <kotlin.compiler.apiVersion>2.1</kotlin.compiler.apiVersion>
@@ -49,8 +49,6 @@
         <springmockk.version>4.0.2</springmockk.version>
         <!-- Build Plugins -->
         <flatten-maven-plugin.version>1.7.0</flatten-maven-plugin.version>
-        <!-- JUnit Jupiter Version for kotlin-test compatibility -->
-        <junit-jupiter.version>5.11.4</junit-jupiter.version>
     </properties>
 
     <dependencyManagement>
@@ -275,33 +273,10 @@
             </dependency>
 
             <!-- Unit and Integration Testing -->
-            <!-- Override kotlin-test version 1.9.25 transitively from Spring Boot BOM to use ${kotlin.version} -->
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
                 <artifactId>kotlin-test</artifactId>
                 <version>${kotlin.version}</version>
-                <scope>test</scope>
-            </dependency>
-            
-            <!-- Manage compatibility between kotlin-test and JUnit5 -->
-            <dependency>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-test-junit5</artifactId>
-                <version>${kotlin.version}</version>
-                <scope>test</scope>
-            </dependency>
-            
-            <!-- Override JUnit to 5.11.4 for kotlin-test compatibility (compromise between 5.10.1 and 5.12.2) -->
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
-                <version>${junit-jupiter.version}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>${junit-jupiter.version}</version>
                 <scope>test</scope>
             </dependency>
 
