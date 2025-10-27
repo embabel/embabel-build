@@ -14,6 +14,7 @@
         <kotlin.compiler.apiVersion>2.1</kotlin.compiler.apiVersion>
         <!-- Apache Commons -->
         <apache-commons-text.version>1.10.0</apache-commons-text.version>
+        <apache-commons-lang3.version>3.18.0</apache-commons-lang3.version>
         <!-- AI Frameworks -->
         <spring-ai.version>1.0.0</spring-ai.version>
         <mcp-sdk.version>0.10.0</mcp-sdk.version>
@@ -85,7 +86,13 @@
                 <artifactId>commons-text</artifactId>
                 <version>${apache-commons-text.version}</version>
             </dependency>
-            
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${apache-commons-lang3.version}</version>
+            </dependency>
+
             <!-- Spring Shell -->
             <dependency>
                 <groupId>org.springframework.shell</groupId>
