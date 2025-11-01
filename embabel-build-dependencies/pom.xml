@@ -41,7 +41,7 @@
         <!-- Netty BOM -->
         <netty.version>4.1.125.Final</netty.version>
         <!-- Embedded Tomcat -->
-        <tomcat-embed.version>10.1.44</tomcat-embed.version>
+        <tomcat-embed.version>10.1.45</tomcat-embed.version>
         <!-- Names Generator -->
         <moby-names-generator.version>20.10.1-r0</moby-names-generator.version>
         <!-- Unit and Integration Testing -->
