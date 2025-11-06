@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2024-2025 the original author or authors.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.embabel.build</groupId>
@@ -12,7 +27,7 @@
         <module>embabel-build-dependencies</module>
         <module>embabel-dependencies-parent</module>
     </modules>
-    <url>https://embabel.com/embabel</url> <!--setup github pages-->
+    <url>https://github.com/embabel</url> <!--setup github pages-->
     <properties>
         <!-- Java Version and Compiler -->
         <java.version>21</java.version>
@@ -50,6 +65,7 @@
         <maven-source-plugin.version>3.3.1</maven-source-plugin.version>
         <build-helper-maven-plugin.version>3.4.0</build-helper-maven-plugin.version>
         <flatten-maven-plugin.version>1.7.0</flatten-maven-plugin.version>
+        <maven-deploy-plugin.version>3.1.1</maven-deploy-plugin.version>
         <license-maven-plugin.version>2.5.0</license-maven-plugin.version>
         <git-commit-id-plugin.version>4.9.10</git-commit-id-plugin.version>
         <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
@@ -62,6 +78,10 @@
         <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
         <sonar.language>java</sonar.language>
+
+        <!-- Required by Maven Central -->
+        <maven-gpg-plugin.version>3.2.8</maven-gpg-plugin.version>
+        <central-publishing-maven-plugin.version>0.9.0</central-publishing-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -77,7 +97,7 @@
         </dependencies>
     </dependencyManagement>
     <organization>
-        <name>Embabel Software, Inc.</name>
+        <name>Embabel Pty Ltd</name>
         <url>https://www.embabel.com</url>
     </organization>
     <licenses>
@@ -109,11 +129,19 @@
         <developerConnection>scm:git:https://github.com/embabel/embabel-build.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
+    <issueManagement>
+        <system>Github Issues</system>
+        <url>https://github.com/embabel/embabel-agent/issues</url>
+    </issueManagement>
+    <ciManagement>
+        <system>Github Actions</system>
+        <url>https://github.com/embabel/embabel-agent/actions</url>
+    </ciManagement>
     <developers>
         <developer>
             <id>rjohnson</id>
             <name>Rod Johnson</name>
-            <email>rjohnson at embabel.com</email>
+            <email>rod@embabel.com</email>
             <organization>Embabel Software, Inc.</organization>
             <organizationUrl>https://www.embabel.com</organizationUrl>
             <roles>
@@ -123,8 +151,8 @@
         <developer>
             <id>alexheifetz</id>
             <name>Alex Hein-Heifetz</name>
-            <email>aheifetz at embabel.com</email>
-            <organization>Embabel Software, Inc.</organization>
+            <email>alex@embabel.com</email>
+            <organization>Embabel Pty Ltd</organization>
             <organizationUrl>https://www.embabel.com</organizationUrl>
             <roles>
                 <role>lead</role>
@@ -133,18 +161,8 @@
         <developer>
             <id>igordayen</id>
             <name>Igor Dayen</name>
-            <email>idayen at embabel.com</email>
-            <organization>Embabel Software, Inc.</organization>
-            <organizationUrl>https://www.embabel.com</organizationUrl>
-            <roles>
-                <role>lead</role>
-            </roles>
-        </developer>
-        <developer>
-            <id>slimslenderslacks</id>
-            <name>Jim Clark</name>
-            <email>jclark at embabel.com</email>
-            <organization>Embabel Software, Inc.</organization>
+            <email>igor@embabel.com</email>
+            <organization>Embabel Pty Ltd</organization>
             <organizationUrl>https://www.embabel.com</organizationUrl>
             <roles>
                 <role>lead</role>
@@ -153,8 +171,8 @@
         <developer>
             <id>poutsma</id>
             <name>Arjen Poutsma</name>
-            <email>apoutsma at embabel.com</email>
-            <organization>Embabel Software, Inc.</organization>
+            <email>arjen@embabel.com</email>
+            <organization>Embabel Pty Ltd</organization>
             <organizationUrl>https://www.embabel.com</organizationUrl>
             <roles>
                 <role>lead</role>
@@ -163,8 +181,8 @@
         <developer>
             <id>jasperblues</id>
             <name>Jasper Blues</name>
-            <email>jblues at embabel.com</email>
-            <organization>Embabel Software, Inc.</organization>
+            <email>jasper@embabel.com</email>
+            <organization>Embabel Pty Ltd</organization>
             <organizationUrl>https://www.embabel.com</organizationUrl>
             <roles>
                 <role>lead</role>
@@ -446,15 +464,30 @@
                             </goals>
                             <configuration>
                                 <updatePomFile>true</updatePomFile>
-                                <flattenMode>oss</flattenMode>
+                                <flattenMode>ossrh</flattenMode>
                                 <pomElements>
-                                    <parent>expand</parent>
                                     <distributionManagement>remove</distributionManagement>
-                                    <repositories>keep</repositories>
+                                    <dependencyManagement>remove</dependencyManagement>
+                                    <repositories>remove</repositories>
+                                    <scm>keep</scm>
+                                    <url>keep</url>
+                                    <organization>resolve</organization>
                                 </pomElements>
                             </configuration>
                         </execution>
+                        <execution>
+                            <id>clean</id>
+                            <phase>clean</phase>
+                            <goals>
+                                <goal>clean</goal>
+                            </goals>
+                        </execution>
                     </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugin</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven-deploy-plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -647,9 +680,90 @@
                 </plugins>
             </build>
         </profile>
+        <profile>
+            <id>flatten-poms</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>sonatype</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.jetbrains.dokka</groupId>
+                        <artifactId>dokka-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>dokka-javadoc-jar</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>javadocJar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!--Passphrase consumed from MAVEN_GPG_PASSPHRASE environment variable.-->
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>${central-publishing-maven-plugin.version}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <skipPublishing>true</skipPublishing>
+                            <autoPublish>false</autoPublish>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+            <distributionManagement>
+                <repository>
+                    <id>central</id>
+                    <url>https://central.sonatype.com/publishing/v2</url>
+                </repository>
+                <snapshotRepository>
+                    <id>central</id>
+                    <url>https://central.sonatype.com/publishing/v2</url>
+                </snapshotRepository>
+            </distributionManagement>
+        </profile>
     </profiles>
 
     <repositories>
+        <repository>
+            <id>maven-central</id>
+            <url>https://repo.maven.apache.org/maven2/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
         <repository>
             <id>embabel-releases</id>
             <name>Embabel Releases</name>

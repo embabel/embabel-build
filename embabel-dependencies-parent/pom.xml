@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright 2024-2025 the original author or authors.
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.embabel.build</groupId>
@@ -13,13 +28,18 @@
         <flatten-maven-plugin.version>1.7.0</flatten-maven-plugin.version>
         <maven-enforcer-plugin.version>3.4.1</maven-enforcer-plugin.version>
         <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
+        <!-- Maven Central -->
+        <maven-gpg-plugin.version>3.2.5</maven-gpg-plugin.version>
+        <central-publishing-maven-plugin.version>0.9.0</central-publishing-maven-plugin.version>
     </properties>
-    
-    <url>https://embabel.com/embabel</url>
+
+    <url>https://github.com/embabel</url>
+
     <organization>
-        <name>Embabel Software, Inc.</name>
+        <name>Embabel Pty Ltd</name>
         <url>https://www.embabel.com</url>
     </organization>
+
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
@@ -52,12 +72,20 @@
         </developerConnection>
         <tag>HEAD</tag>
     </scm>
+    <issueManagement>
+        <system>Github Issues</system>
+        <url>https://github.com/embabel/embabel-agent/issues</url>
+    </issueManagement>
+    <ciManagement>
+        <system>Github Actions</system>
+        <url>https://github.com/embabel/embabel-agent/actions</url>
+    </ciManagement>
     <developers>
         <developer>
             <id>rjohnson</id>
             <name>Rod Johnson</name>
-            <email>rjohnson at embabel.com</email>
-            <organization>Embabel Software, Inc.</organization>
+            <email>rod@embabel.com</email>
+            <organization>Embabel Pty Ltd</organization>
             <organizationUrl>https://www.embabel.com</organizationUrl>
             <roles>
                 <role>Founder and Project Lead</role>
@@ -66,8 +94,38 @@
         <developer>
             <id>alexheifetz</id>
             <name>Alex Hein-Heifetz</name>
-            <email>aheifetz at embabel.com</email>
-            <organization>Embabel Software, Inc.</organization>
+            <email>alex@embabel.com</email>
+            <organization>Embabel Pty Ltd</organization>
+            <organizationUrl>https://www.embabel.com</organizationUrl>
+            <roles>
+                <role>lead</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>igordayen</id>
+            <name>Igor Dayen</name>
+            <email>igor@embabel.com</email>
+            <organization>Embabel Pty Ltd</organization>
+            <organizationUrl>https://www.embabel.com</organizationUrl>
+            <roles>
+                <role>lead</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>poutsma</id>
+            <name>Arjen Poutsma</name>
+            <email>arjen@embabel.com</email>
+            <organization>Embabel Pty Ltd</organization>
+            <organizationUrl>https://www.embabel.com</organizationUrl>
+            <roles>
+                <role>lead</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>jasperblues</id>
+            <name>Jasper Blues</name>
+            <email>jasper@embabel.com</email>
+            <organization>Embabel Pty Ltd</organization>
             <organizationUrl>https://www.embabel.com</organizationUrl>
             <roles>
                 <role>lead</role>
@@ -81,7 +139,6 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>flatten-maven-plugin</artifactId>
                     <version>${flatten-maven-plugin.version}</version>
-                    <inherited>true</inherited>
                     <executions>
                         <execution>
                             <id>flatten</id>
@@ -91,13 +148,23 @@
                             </goals>
                             <configuration>
                                 <updatePomFile>true</updatePomFile>
-                                <flattenMode>oss</flattenMode>
+                                <flattenMode>ossrh</flattenMode>
                                 <pomElements>
-                                    <parent>expand</parent>
                                     <distributionManagement>remove</distributionManagement>
+                                    <dependencyManagement>keep</dependencyManagement>
                                     <repositories>remove</repositories>
+                                    <scm>keep</scm>
+                                    <url>keep</url>
+                                    <organization>resolve</organization>
                                 </pomElements>
                             </configuration>
+                        </execution>
+                        <execution>
+                            <id>clean</id>
+                            <phase>clean</phase>
+                            <goals>
+                                <goal>clean</goal>
+                            </goals>
                         </execution>
                     </executions>
                 </plugin>
@@ -171,5 +238,57 @@
             <url>https://repo.embabel.com/artifactory/libs-snapshot/</url>
         </snapshotRepository>
     </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>flatten-poms</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>flatten-maven-plugin</artifactId>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>sonatype</id>
+            <properties>
+                <maven.test.skip>true</maven.test.skip>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>${maven-gpg-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <!--Passphrase consumed from MAVEN_GPG_PASSPHRASE environment variable.-->
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>${central-publishing-maven.version}</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <publishingServerId>central</publishingServerId>
+                            <skipPublishing>true</skipPublishing>
+                            <autoPublish>false</autoPublish>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
 </project>
