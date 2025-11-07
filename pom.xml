@@ -681,7 +681,7 @@
             </build>
         </profile>
         <profile>
-            <id>flatten-poms</id>
+            <id>flatten-pom</id>
             <build>
                 <plugins>
                     <plugin>
