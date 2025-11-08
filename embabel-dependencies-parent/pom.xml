@@ -148,7 +148,7 @@
                             </goals>
                             <configuration>
                                 <updatePomFile>true</updatePomFile>
-                                <flattenMode>ossrh</flattenMode>
+                                <flattenMode>bom</flattenMode>
                                 <pomElements>
                                     <distributionManagement>remove</distributionManagement>
                                     <dependencyManagement>keep</dependencyManagement>
@@ -278,16 +278,25 @@
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>${central-publishing-maven.version}</version>
+                        <version>${central-publishing-maven-plugin.version}</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
-                            <skipPublishing>true</skipPublishing>
                             <autoPublish>false</autoPublish>
                         </configuration>
                     </plugin>
                 </plugins>
             </build>
+            <distributionManagement>
+                <repository>
+                    <id>central</id>
+                    <url>https://central.sonatype.com/publishing/v2</url>
+                </repository>
+                <snapshotRepository>
+                    <id>central</id>
+                    <url>https://central.sonatype.com/publishing/v2</url>
+                </snapshotRepository>
+            </distributionManagement>
         </profile>
     </profiles>
 
