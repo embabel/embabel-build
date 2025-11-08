@@ -734,7 +734,6 @@
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
-                            <skipPublishing>true</skipPublishing>
                             <autoPublish>false</autoPublish>
                         </configuration>
                     </plugin>
