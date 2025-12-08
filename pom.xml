@@ -18,7 +18,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.embabel.build</groupId>
     <artifactId>embabel-build-parent</artifactId>
-    <version>0.1.8-SNAPSHOT</version>
+    <version>0.1.8.1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Embabel Build Parent</name>
     <description>Embabel build parent pom, managing plugins and dependencies for all Embabel projects
@@ -42,8 +42,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Kotlin Version and Compiler -->
-        <kotlin.version>2.1.10</kotlin.version>
-        <kotlin.compiler.apiVersion>2.1</kotlin.compiler.apiVersion>
+        <kotlin.version>2.2.0</kotlin.version>
+        <kotlin.compiler.apiVersion>2.0</kotlin.compiler.apiVersion>
 
         <!-- Spring Boot -->
         <spring-boot.version>3.5.6</spring-boot.version>
@@ -52,7 +52,7 @@
         <resource.delimiter>@</resource.delimiter>
     
         <!-- Embabel Build Version -->
-        <embabel-build.version>0.1.8-SNAPSHOT</embabel-build.version>
+        <embabel-build.version>0.1.8.1-SNAPSHOT</embabel-build.version>
 
         <!-- Build Plugins -->
         <maven.compiler-plugin.version>3.14.0</maven.compiler-plugin.version>
