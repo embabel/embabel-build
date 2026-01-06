@@ -105,7 +105,7 @@
             <name>Apache License, Version 2.0</name>
             <url>https://www.apache.org/licenses/LICENSE-2.0</url>
             <comments>
-                Copyright 2024-2026 the Embabel Software Inc.
+                Copyright 2024-2026 the Embabel Pty Ltd.
 
                 Licensed under the Apache License, Version 2.0 (the "License");
                 you may not use this file except in compliance with the License.
@@ -142,7 +142,7 @@
             <id>rjohnson</id>
             <name>Rod Johnson</name>
             <email>rod@embabel.com</email>
-            <organization>Embabel Software, Inc.</organization>
+            <organization>Embabel Pty Ltd</organization>
             <organizationUrl>https://www.embabel.com</organizationUrl>
             <roles>
                 <role>Founder and Project Lead</role>
@@ -614,7 +614,7 @@
                                 <licenseHeader>
                                     <content>
 /*
- * Copyright 2024-$YEAR Embabel Software, Inc.
+ * Copyright 2024-2026 Embabel Pty Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -636,7 +636,7 @@
                                 <licenseHeader>
                                     <content>
 /*
- * Copyright 2024-$YEAR Embabel Software, Inc.
+ * Copyright 2024-2026 Embabel Pty Ltd.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
