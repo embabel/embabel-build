@@ -350,6 +350,7 @@
               <artifactId>assertj-core</artifactId>
               <version>${assertj-core.version}</version>
               <scope>test</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
