@@ -288,8 +288,6 @@
                 <scope>import</scope>
             </dependency>
 
-
-
             <!-- Names Generator -->
             <dependency>
                 <groupId>info.schnatterer.moby-names-generator</groupId>
@@ -315,7 +313,7 @@
             <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>junit-jupiter</artifactId>
-                <version>${testcontainers.junit-jupiter.version}</version>
+                <version>${testcontainers-junit-jupiter.version}</version>
                 <scope>test</scope>
             </dependency>
 
