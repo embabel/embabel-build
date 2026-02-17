@@ -60,7 +60,7 @@
         <!-- Names Generator -->
         <moby-names-generator.version>20.10.1-r0</moby-names-generator.version>
         <!-- Unit and Integration Testing -->
-        <testcontainers.version>2.0.3</testcontainers>
+        <testcontainers.version>2.0.3</testcontainers.version>
         <testcontainers-junit-jupiter.version>1.21.4</testcontainers-junit-jupiter.version>
         <mockito.version>5.18.0</mockito.version>
         <mockk.version>1.13.3</mockk.version>
