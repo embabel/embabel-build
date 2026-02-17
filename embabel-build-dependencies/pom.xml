@@ -18,7 +18,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.embabel.build</groupId>
     <artifactId>embabel-build-dependencies</artifactId>
-    <version>0.1.11-SNAPSHOT</version>
+    <version>0.1.11</version>
     <name>Embabel Build BOM</name>
     <packaging>pom</packaging>
     <description>BOM with Embabel Build Dependencies</description>
@@ -356,7 +356,7 @@
             <dependency>
                 <groupId>com.openai</groupId>
                 <artifactId>openai-java</artifactId>
-                <version>${openai-java.version>}</version>
+                <version>${openai-java.version&gt;}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
