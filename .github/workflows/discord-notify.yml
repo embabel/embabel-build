@@ -1,0 +1,14 @@
+name: Discord Failure Notification
+
+on:
+  workflow_call:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notify Discord
+        run: |
+          curl -H "Content-Type: application/json" \
+            -d '{"content": "❌ Build failed: ${{ github.repository }} (${{ github.ref_name }})\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}' \
+            ${{ secrets.DISCORD_WEBHOOK_URL }}
