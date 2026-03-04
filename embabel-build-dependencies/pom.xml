@@ -59,6 +59,8 @@
         <tomcat-embed.version>10.1.45</tomcat-embed.version>
         <!-- Names Generator -->
         <moby-names-generator.version>20.10.1-r0</moby-names-generator.version>
+        <!-- jackson BOM -->
+        <jackson.version>2.21.1</jackson.version>
         <!-- Unit and Integration Testing -->
         <testcontainers-core.version>2.0.3</testcontainers-core.version>
         <testcontainers-neo4j.version>1.21.4</testcontainers-neo4j.version>
@@ -73,6 +75,16 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Jackson BOM - MUST be before Spring Boot to override its managed version -->
+            <!-- High Vulnerability Fix: GHSA-72hv-8253-57qq -->
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <!-- Spring Boot -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -367,7 +379,9 @@
                 <version>${openai-java.version&gt;}</version>
                 <scope>test</scope>
             </dependency>
+
         </dependencies>
+
     </dependencyManagement>
 
     <repositories>
