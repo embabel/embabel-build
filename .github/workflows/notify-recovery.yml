@@ -67,5 +67,5 @@ jobs:
     if: needs.check-recovery.outputs.is-recovery == 'true'
     uses: embabel/embabel-build/.github/workflows/discord-notify.yml@main
     with:
-      message: '✅ Build recovered'
+      message: '✅ Build Fixed'
     secrets: inherit
