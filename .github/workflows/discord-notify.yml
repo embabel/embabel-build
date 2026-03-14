@@ -1,7 +1,13 @@
-name: Discord Failure Notification
+name: Discord Notification
 
 on:
   workflow_call:
+    inputs:
+      message:
+        description: 'Message prefix to send to Discord'
+        type: string
+        required: false
+        default: '❌ Build failed'
 
 jobs:
   notify:
@@ -10,5 +16,5 @@ jobs:
       - name: Notify Discord
         run: |
           curl -H "Content-Type: application/json" \
-            -d '{"content": "❌ Build failed: ${{ github.repository }} (${{ github.ref_name }})\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}' \
+            -d '{"content": "${{ inputs.message }}: ${{ github.repository }} (${{ github.ref_name }})\n${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"}' \
             ${{ secrets.DISCORD_WEBHOOK_URL }}
