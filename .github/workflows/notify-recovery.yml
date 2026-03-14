@@ -14,8 +14,7 @@ on:
         type: string
         default: ''
     secrets:
-      # Forward whatever secrets discord-notify.yml needs
-      DISCORD_WEBHOOK:
+      DISCORD_WEBHOOK_URL:
         required: false
 
 jobs:
@@ -53,4 +52,6 @@ jobs:
     needs: [check-recovery]
     if: needs.check-recovery.outputs.is-recovery == 'true'
     uses: embabel/embabel-build/.github/workflows/discord-notify.yml@main
+    with:
+      message: '✅ Build recovered'
     secrets: inherit
