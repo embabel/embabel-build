@@ -8,6 +8,10 @@ on:
         required: false
         type: string
         default: 'main'
+      caller_run_id:
+        description: 'github.run_id from the calling workflow — used to resolve the correct workflow history'
+        required: true
+        type: string
     secrets:
       DISCORD_WEBHOOK_URL:
         required: false
@@ -24,20 +28,26 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            // Resolve the numeric workflow ID from the current run
-            // so we never need a hardcoded filename — works in any repo
+            // Use the caller's run_id (passed explicitly) to resolve the correct
+            // repo and workflow — context.runId here would point at the reusable
+            // workflow's own run, not the caller's build run
+            const callerRunId = parseInt('${{ inputs.caller_run_id }}');
+
             const currentRun = await github.rest.actions.getWorkflowRun({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              run_id: context.runId
+              run_id: callerRunId
             });
 
             const workflowId = currentRun.data.workflow_id;
-            console.log(`Resolved workflow_id: ${workflowId}`);
+            const callerRepo = currentRun.data.repository.full_name;
+            console.log(`Caller repo: ${callerRepo}, workflow_id: ${workflowId}`);
+
+            const [owner, repo] = callerRepo.split('/');
 
             const runs = await github.rest.actions.listWorkflowRuns({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
+              owner,
+              repo,
               workflow_id: workflowId,
               branch: '${{ inputs.branch }}',
               exclude_pull_requests: true,
@@ -45,7 +55,7 @@ jobs:
             });
 
             const previousRun = runs.data.workflow_runs
-              .filter(run => run.id !== context.runId && run.status === 'completed')
+              .filter(run => run.id !== callerRunId && run.status === 'completed')
               .at(0);
 
             const wasFailure = previousRun?.conclusion === 'failure';
