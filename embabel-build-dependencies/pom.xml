@@ -52,7 +52,7 @@
         <swagger-annotations.version>2.2.28</swagger-annotations.version>
         <swagger-parser.version>2.1.25</swagger-parser.version>
         <!-- Apache Tika -->
-        <tika.version>3.2.2</tika.version>
+        <tika.version>3.3.0</tika.version>
         <!-- Netty BOM -->
         <netty.version>4.1.125.Final</netty.version>
         <!-- Embedded Tomcat -->
