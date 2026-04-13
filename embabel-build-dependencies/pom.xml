@@ -56,7 +56,7 @@
         <!-- Netty BOM -->
         <netty.version>4.1.125.Final</netty.version>
         <!-- Embedded Tomcat -->
-        <tomcat-embed.version>10.1.52</tomcat-embed.version>
+        <tomcat-embed.version>10.1.53</tomcat-embed.version>
         <!-- Names Generator -->
         <moby-names-generator.version>20.10.1-r0</moby-names-generator.version>
         <!-- jackson BOM -->
