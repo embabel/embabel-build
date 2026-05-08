@@ -23,7 +23,7 @@
     <packaging>pom</packaging>
     <description>BOM with Embabel Build Dependencies</description>
     <properties>
-        <spring-boot.version>3.5.12</spring-boot.version>
+        <spring-boot.version>3.5.14</spring-boot.version>
         <!-- Kotlin Version and Compiler -->
         <kotlin.version>2.1.10</kotlin.version>
         <kotlin.compiler.apiVersion>2.1</kotlin.compiler.apiVersion>
@@ -31,7 +31,7 @@
         <apache-commons-text.version>1.10.0</apache-commons-text.version>
         <apache-commons-lang3.version>3.18.0</apache-commons-lang3.version>
         <!-- AI Frameworks -->
-        <spring-ai.version>1.1.4</spring-ai.version>
+        <spring-ai.version>1.1.5</spring-ai.version>
         <mcp-sdk.version>0.17.0</mcp-sdk.version>
         <!-- Kotlin Coroutines -->
         <kotlin-coroutines.version>1.10.1</kotlin-coroutines.version>
@@ -54,7 +54,7 @@
         <!-- Apache Tika -->
         <tika.version>3.3.0</tika.version>
         <!-- Netty BOM -->
-        <netty.version>4.1.125.Final</netty.version>
+        <netty.version>4.2.13.Final</netty.version>
         <!-- Embedded Tomcat -->
         <tomcat-embed.version>10.1.54</tomcat-embed.version>
         <!-- Names Generator -->
