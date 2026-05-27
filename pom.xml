@@ -46,13 +46,13 @@
         <kotlin.compiler.apiVersion>2.1</kotlin.compiler.apiVersion>
 
         <!-- Spring Boot -->
-        <spring-boot.version>3.5.12</spring-boot.version>
+        <spring-boot.version>4.0.6</spring-boot.version>
 
         <!-- Resource Delimiter -->
         <resource.delimiter>@</resource.delimiter>
     
         <!-- Embabel Build Version -->
-        <embabel-build.version>0.1.14-SNAPSHOT</embabel-build.version>
+        <embabel-build.version>2.0.0-SNAPSHOT</embabel-build.version>
 
         <!-- Build Plugins -->
         <maven.compiler-plugin.version>3.14.0</maven.compiler-plugin.version>
