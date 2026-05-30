@@ -270,6 +270,14 @@
                         <jvmTarget>${maven.compiler.target}</jvmTarget>
                         <args>
                             <arg>-Xjsr305=strict</arg>
+                            <!--
+                                JSpecify @NullMarked in Spring 7 / Spring AI 2.0 / Jackson 3 / JUnit 6 tightens
+                                generic upper bounds to non-null (T : Any). With strict mode the K2 compiler
+                                rejects unbounded <T> overrides of those APIs. "warn" reports the mismatch but
+                                does not block compilation, letting us keep the existing <T>/<O> signatures
+                                without an Any-bound sweep.
+                            -->
+                            <arg>-Xjspecify-annotations=ignore</arg>
                             <arg>-Xjvm-default=all</arg>
                             <arg>-Xsuppress-warning=UNCHECKED_CAST</arg>
                         </args>

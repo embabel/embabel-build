@@ -70,7 +70,10 @@
         <springmockk.version>4.0.2</springmockk.version>
         <archunit.version>1.4.2</archunit.version>
         <assertj-core.version>3.27.7</assertj-core.version>
-        <openai-java.version>4.16.1</openai-java.version>
+        <!-- Spring AI 2.0.0-M8's spring-ai-openai is compiled against openai-java 4.36.0;
+             bumping the BOM in lockstep avoids ABI drift between Spring AI's transitive
+             dep and any module that pulls openai-java directly. -->
+        <openai-java.version>4.36.0</openai-java.version>
     </properties>
 
     <dependencyManagement>
@@ -373,11 +376,21 @@
               <scope>test</scope>
             </dependency>
 
+            <!--
+              embabel-agent-openai uses OpenAIClient / OpenAIOkHttpClient on its main
+              classpath now (Spring AI 2.0 dropped its hand-rolled OpenAiApi wrapper),
+              so this stays at compile scope. Tests that don't transitively depend on
+              embabel-agent-openai can still depend on the artifact directly.
+            -->
             <dependency>
                 <groupId>com.openai</groupId>
                 <artifactId>openai-java</artifactId>
-                <version>${openai-java.version&gt;}</version>
-                <scope>test</scope>
+                <version>${openai-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.openai</groupId>
+                <artifactId>openai-java-client-okhttp</artifactId>
+                <version>${openai-java.version}</version>
             </dependency>
 
         </dependencies>
