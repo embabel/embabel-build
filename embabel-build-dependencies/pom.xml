@@ -74,6 +74,10 @@
              bumping the BOM in lockstep avoids ABI drift between Spring AI's transitive
              dep and any module that pulls openai-java directly. -->
         <openai-java.version>4.36.0</openai-java.version>
+        <!-- spring-ai-anthropic depends on anthropic-java-core but not anthropic-java-client-okhttp,
+             which the agent uses directly. Manage the Anthropic SDK in lockstep with the version
+             Spring AI compiles against, mirroring the openai-java handling above. -->
+        <anthropic-java.version>2.40.1</anthropic-java.version>
     </properties>
 
     <dependencyManagement>
@@ -391,6 +395,16 @@
                 <groupId>com.openai</groupId>
                 <artifactId>openai-java-client-okhttp</artifactId>
                 <version>${openai-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.anthropic</groupId>
+                <artifactId>anthropic-java-core</artifactId>
+                <version>${anthropic-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.anthropic</groupId>
+                <artifactId>anthropic-java-client-okhttp</artifactId>
+                <version>${anthropic-java.version}</version>
             </dependency>
 
         </dependencies>

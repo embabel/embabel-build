@@ -279,7 +279,7 @@
                             -->
                             <arg>-Xjspecify-annotations=ignore</arg>
                             <arg>-Xjvm-default=all</arg>
-                            <arg>-Xsuppress-warning=UNCHECKED_CAST</arg>
+                            <arg>-Xwarning-level=UNCHECKED_CAST:disabled</arg>
                         </args>
                         <compilerPlugins>
                             <plugin>spring</plugin>
