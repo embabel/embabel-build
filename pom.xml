@@ -46,7 +46,7 @@
         <kotlin.compiler.apiVersion>2.2</kotlin.compiler.apiVersion>
 
         <!-- Spring Boot -->
-        <spring-boot.version>4.0.6</spring-boot.version>
+        <spring-boot.version>4.1.0</spring-boot.version>
 
         <!-- Resource Delimiter -->
         <resource.delimiter>@</resource.delimiter>
