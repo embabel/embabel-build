@@ -54,13 +54,13 @@
         <!-- Apache Tika -->
         <tika.version>3.3.0</tika.version>
         <!-- Netty BOM -->
-        <netty.version>4.2.13.Final</netty.version>
+        <netty.version>4.2.15.Final</netty.version>
         <!-- Embedded Tomcat -->
         <tomcat-embed.version>10.1.55</tomcat-embed.version>
         <!-- Names Generator -->
         <moby-names-generator.version>20.10.1-r0</moby-names-generator.version>
         <!-- jackson BOM -->
-        <jackson.version>2.21.1</jackson.version>
+        <jackson.version>2.21.4</jackson.version>
         <!-- Unit and Integration Testing -->
         <testcontainers-core.version>2.0.3</testcontainers-core.version>
         <testcontainers-neo4j.version>1.21.4</testcontainers-neo4j.version>
