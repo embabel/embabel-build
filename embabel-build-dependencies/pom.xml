@@ -18,21 +18,21 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.embabel.build</groupId>
     <artifactId>embabel-build-dependencies</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>2.0.0-SNAPSHOT</version>
     <name>Embabel Build BOM</name>
     <packaging>pom</packaging>
     <description>BOM with Embabel Build Dependencies</description>
     <properties>
-        <spring-boot.version>3.5.14</spring-boot.version>
+        <spring-boot.version>4.1.0</spring-boot.version>
         <!-- Kotlin Version and Compiler -->
-        <kotlin.version>2.1.10</kotlin.version>
-        <kotlin.compiler.apiVersion>2.1</kotlin.compiler.apiVersion>
+        <kotlin.version>2.2.21</kotlin.version>
+        <kotlin.compiler.apiVersion>2.2</kotlin.compiler.apiVersion>
         <!-- Apache Commons -->
         <apache-commons-text.version>1.10.0</apache-commons-text.version>
         <apache-commons-lang3.version>3.18.0</apache-commons-lang3.version>
         <!-- AI Frameworks -->
-        <spring-ai.version>1.1.7</spring-ai.version>
-        <mcp-sdk.version>0.18.2</mcp-sdk.version>
+        <spring-ai.version>2.0.0</spring-ai.version>
+        <mcp-sdk.version>2.0.0</mcp-sdk.version>
         <!-- Kotlin Coroutines -->
         <kotlin-coroutines.version>1.10.1</kotlin-coroutines.version>
         <!-- Ingestion Frameworks -->
@@ -70,7 +70,14 @@
         <springmockk.version>4.0.2</springmockk.version>
         <archunit.version>1.4.2</archunit.version>
         <assertj-core.version>3.27.7</assertj-core.version>
-        <openai-java.version>4.16.1</openai-java.version>
+        <!-- Spring AI 2.0.0-M8's spring-ai-openai is compiled against openai-java 4.36.0;
+             bumping the BOM in lockstep avoids ABI drift between Spring AI's transitive
+             dep and any module that pulls openai-java directly. -->
+        <openai-java.version>4.36.0</openai-java.version>
+        <!-- spring-ai-anthropic depends on anthropic-java-core but not anthropic-java-client-okhttp,
+             which the agent uses directly. Manage the Anthropic SDK in lockstep with the version
+             Spring AI compiles against, mirroring the openai-java handling above. -->
+        <anthropic-java.version>2.40.1</anthropic-java.version>
     </properties>
 
     <dependencyManagement>
@@ -373,11 +380,31 @@
               <scope>test</scope>
             </dependency>
 
+            <!--
+              embabel-agent-openai uses OpenAIClient / OpenAIOkHttpClient on its main
+              classpath now (Spring AI 2.0 dropped its hand-rolled OpenAiApi wrapper),
+              so this stays at compile scope. Tests that don't transitively depend on
+              embabel-agent-openai can still depend on the artifact directly.
+            -->
             <dependency>
                 <groupId>com.openai</groupId>
                 <artifactId>openai-java</artifactId>
-                <version>${openai-java.version&gt;}</version>
-                <scope>test</scope>
+                <version>${openai-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.openai</groupId>
+                <artifactId>openai-java-client-okhttp</artifactId>
+                <version>${openai-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.anthropic</groupId>
+                <artifactId>anthropic-java-core</artifactId>
+                <version>${anthropic-java.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.anthropic</groupId>
+                <artifactId>anthropic-java-client-okhttp</artifactId>
+                <version>${anthropic-java.version}</version>
             </dependency>
 
         </dependencies>
