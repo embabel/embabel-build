@@ -23,7 +23,7 @@
     <packaging>pom</packaging>
     <description>BOM with Embabel Build Dependencies</description>
     <properties>
-        <spring-boot.version>4.1.0</spring-boot.version>
+        <spring-boot.version>4.1.1</spring-boot.version>
         <!-- Kotlin Version and Compiler -->
         <kotlin.version>2.2.21</kotlin.version>
         <kotlin.compiler.apiVersion>2.2</kotlin.compiler.apiVersion>
@@ -31,7 +31,7 @@
         <apache-commons-text.version>1.10.0</apache-commons-text.version>
         <apache-commons-lang3.version>3.18.0</apache-commons-lang3.version>
         <!-- AI Frameworks -->
-        <spring-ai.version>2.0.0</spring-ai.version>
+        <spring-ai.version>2.0.1</spring-ai.version>
         <mcp-sdk.version>2.0.0</mcp-sdk.version>
         <!-- Kotlin Coroutines -->
         <kotlin-coroutines.version>1.10.1</kotlin-coroutines.version>
