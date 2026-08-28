@@ -78,6 +78,8 @@
              which the agent uses directly. Manage the Anthropic SDK in lockstep with the version
              Spring AI compiles against, mirroring the openai-java handling above. -->
         <anthropic-java.version>2.40.1</anthropic-java.version>
+        <!-- OCI SDK for Oracle LLM Integration -->
+        <oci-sdk.version>3.86.1</oci-sdk.version>
     </properties>
 
     <dependencyManagement>
@@ -114,6 +116,14 @@
                 <groupId>io.modelcontextprotocol.sdk</groupId>
                 <artifactId>mcp-bom</artifactId>
                 <version>${mcp-sdk.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.oracle.oci.sdk</groupId>
+                <artifactId>oci-java-sdk-bom</artifactId>
+                <version>${oci-sdk.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
