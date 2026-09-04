@@ -25,7 +25,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Configure Maven Settings
-        uses: s4u/maven-settings-action@v2.8.0
+        uses: s4u/maven-settings-action@v4.0.0
         with:
           servers: ${{secrets.EMBABEL_ARTIFACTORY}}
       - name: Build and analyze
