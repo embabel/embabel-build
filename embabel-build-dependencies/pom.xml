@@ -82,6 +82,8 @@
         <anthropic-java.version>2.40.1</anthropic-java.version>
         <!-- OCI SDK for Oracle LLM Integration -->
         <oci-sdk.version>3.86.1</oci-sdk.version>
+        <!-- A2A Java SDK -->
+        <a2a.sdk.version>0.3.3.Final</a2a.sdk.version>
     </properties>
 
     <dependencyManagement>
@@ -426,6 +428,23 @@
                 <groupId>com.anthropic</groupId>
                 <artifactId>anthropic-java-client-okhttp</artifactId>
                 <version>${anthropic-java.version}</version>
+            </dependency>
+
+            <!-- A2A Java SDK -->
+            <dependency>
+                <groupId>io.github.a2asdk</groupId>
+                <artifactId>a2a-java-sdk-spec</artifactId>
+                <version>${a2a.sdk.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.a2asdk</groupId>
+                <artifactId>a2a-java-sdk-client</artifactId>
+                <version>${a2a.sdk.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.a2asdk</groupId>
+                <artifactId>a2a-java-sdk-client-transport-rest</artifactId>
+                <version>${a2a.sdk.version}</version>
             </dependency>
 
         </dependencies>
