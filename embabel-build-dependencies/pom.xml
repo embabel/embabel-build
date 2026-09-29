@@ -132,6 +132,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.springaicommunity</groupId>
+                <artifactId>spring-ai-starter-typesafe</artifactId>
+                <version>${typesafe-java-sdk.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.oracle.oci.sdk</groupId>
                 <artifactId>oci-java-sdk-bom</artifactId>
                 <version>${oci-sdk.version}</version>
