@@ -56,14 +56,17 @@
         <bouncy-castle.version>1.85.2</bouncy-castle.version>
         <!-- Apache Tika -->
         <tika.version>3.3.0</tika.version>
+        <!-- jsoup security override for Tika's transitive dependency -->
+        <jsoup.version>1.23.2</jsoup.version>
         <!-- Netty BOM -->
-        <netty.version>4.2.15.Final</netty.version>
+        <netty.version>4.2.19.Final</netty.version>
         <!-- Embedded Tomcat -->
         <tomcat-embed.version>10.1.59</tomcat-embed.version>
         <!-- Names Generator -->
         <moby-names-generator.version>20.10.1-r0</moby-names-generator.version>
         <!-- jackson BOM -->
-        <jackson.version>2.21.4</jackson.version>
+        <jackson.version>2.21.7</jackson.version>
+        <jackson3.version>3.1.7</jackson3.version>
         <!-- Unit and Integration Testing -->
         <testcontainers-core.version>2.0.3</testcontainers-core.version>
         <testcontainers-neo4j.version>1.21.4</testcontainers-neo4j.version>
@@ -95,6 +98,26 @@
                 <groupId>com.fasterxml.jackson</groupId>
                 <artifactId>jackson-bom</artifactId>
                 <version>${jackson.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Override Spring Boot's Jackson 3 version for GHSA-p6pp-m3f8-5c89.
+                 Remove when Spring Boot manages a patched version. -->
+            <dependency>
+                <groupId>tools.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson3.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Netty BOM - MUST be before Spring Boot to override its managed version -->
+            <!-- High Vulnerability Report -->
+            <dependency>
+                <groupId>io.netty</groupId>
+                <artifactId>netty-bom</artifactId>
+                <version>${netty.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -310,6 +333,14 @@
                 <version>${tika.version}</version>
             </dependency>
 
+            <!-- Override Tika's jsoup dependency for GHSA-65r4-943x-97jj.
+                 Revisit upon upgrading Tika to 4.1.0. -->
+            <dependency>
+                <groupId>org.jsoup</groupId>
+                <artifactId>jsoup</artifactId>
+                <version>${jsoup.version}</version>
+            </dependency>
+
             <!--java jna required for WinUtils -->
             <dependency>
                 <groupId>net.java.dev.jna</groupId>
@@ -329,15 +360,6 @@
                 <version>${tomcat-embed.version}</version>
             </dependency>
             
-            <!-- Netty Upgrade - High Vulnerability Report -->
-            <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-bom</artifactId>
-                <version>${netty.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
             <!-- Names Generator -->
             <dependency>
                 <groupId>info.schnatterer.moby-names-generator</groupId>
