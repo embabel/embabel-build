@@ -34,6 +34,7 @@
         <spring-ai.version>2.0.1</spring-ai.version>
         <mcp-sdk.version>2.0.0</mcp-sdk.version>
         <typesafe-java-sdk.version>0.2.0</typesafe-java-sdk.version>
+        <victools-jsonschema.version>5.0.0</victools-jsonschema.version>
         <!-- Kotlin Coroutines -->
         <kotlin-coroutines.version>1.10.1</kotlin-coroutines.version>
         <!-- Ingestion Frameworks -->
@@ -46,7 +47,9 @@
         <!-- AsciiTable -->
         <asciitable.version>0.3.2</asciitable.version>
         <!-- Spring Shell -->
-        <spring-shell-starter.version>3.4.0</spring-shell-starter.version>
+        <spring-shell.version>4.0.3</spring-shell.version>
+        <!-- ReDoS fix: GHSA-r2xf-8xr9-62gw (Spring Shell 4.0.3 still ships JLine 3.30.13) -->
+        <jline.version>3.30.15</jline.version>
         <!-- OpenAPI -->
         <springdoc-openapi.version>2.8.5</springdoc-openapi.version>
         <!-- Swagger -->
@@ -155,6 +158,12 @@
             </dependency>
 
             <dependency>
+                <groupId>com.github.victools</groupId>
+                <artifactId>jsonschema-module-jakarta-validation</artifactId>
+                <version>${victools-jsonschema.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.oracle.oci.sdk</groupId>
                 <artifactId>oci-java-sdk-bom</artifactId>
                 <version>${oci-sdk.version}</version>
@@ -179,7 +188,17 @@
             <dependency>
                 <groupId>org.springframework.shell</groupId>
                 <artifactId>spring-shell-starter</artifactId>
-                <version>${spring-shell-starter.version}</version>
+                <version>${spring-shell.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.shell</groupId>
+                <artifactId>spring-shell-jline</artifactId>
+                <version>${spring-shell.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jline</groupId>
+                <artifactId>jline</artifactId>
+                <version>${jline.version}</version>
             </dependency>
 
             <!-- Kotlin Coroutines BOM -->
