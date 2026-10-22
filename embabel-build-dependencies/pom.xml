@@ -47,8 +47,9 @@
         <!-- AsciiTable -->
         <asciitable.version>0.3.2</asciitable.version>
         <!-- Spring Shell -->
-        <spring-shell-starter.version>3.4.0</spring-shell-starter.version>
-        <!-- ReDoS fix: GHSA-r2xf-8xr9-62gw (Spring Shell 3.4.0 ships JLine 3.27.x) -->
+        <spring-shell.version>4.0.3</spring-shell.version>
+        <!-- GHSA-r2xf-8xr9-62gw is fixed in JLine 3.30.15.
+             Override Spring Shell 4.0.3's JLine 3.30.13, including separately resolved builtins. -->
         <jline.version>3.30.15</jline.version>
         <!-- OpenAPI -->
         <springdoc-openapi.version>2.8.5</springdoc-openapi.version>
@@ -59,6 +60,8 @@
         <bouncy-castle.version>1.85.2</bouncy-castle.version>
         <!-- Apache Tika -->
         <tika.version>3.3.0</tika.version>
+        <!-- GHSA-h9h9-2rmf-rvhp: override Tika's vulnerable Junrar dependency. -->
+        <junrar.version>7.6.1</junrar.version>
         <!-- jsoup security override for Tika's transitive dependency -->
         <jsoup.version>1.23.2</jsoup.version>
         <!-- Netty BOM -->
@@ -188,11 +191,21 @@
             <dependency>
                 <groupId>org.springframework.shell</groupId>
                 <artifactId>spring-shell-starter</artifactId>
-                <version>${spring-shell-starter.version}</version>
+                <version>${spring-shell.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.shell</groupId>
+                <artifactId>spring-shell-jline</artifactId>
+                <version>${spring-shell.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jline</groupId>
                 <artifactId>jline</artifactId>
+                <version>${jline.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jline</groupId>
+                <artifactId>jline-builtins</artifactId>
                 <version>${jline.version}</version>
             </dependency>
 
@@ -345,6 +358,11 @@
                 <groupId>org.apache.tika</groupId>
                 <artifactId>tika-parsers-standard-package</artifactId>
                 <version>${tika.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.junrar</groupId>
+                <artifactId>junrar</artifactId>
+                <version>${junrar.version}</version>
             </dependency>
 
             <!-- Override Tika's jsoup dependency for GHSA-65r4-943x-97jj.
