@@ -47,8 +47,8 @@
         <!-- AsciiTable -->
         <asciitable.version>0.3.2</asciitable.version>
         <!-- Spring Shell -->
-        <spring-shell.version>4.0.3</spring-shell.version>
-        <!-- ReDoS fix: GHSA-r2xf-8xr9-62gw (Spring Shell 4.0.3 still ships JLine 3.30.13) -->
+        <spring-shell-starter.version>3.4.0</spring-shell-starter.version>
+        <!-- ReDoS fix: GHSA-r2xf-8xr9-62gw (Spring Shell 3.4.0 ships JLine 3.27.x) -->
         <jline.version>3.30.15</jline.version>
         <!-- OpenAPI -->
         <springdoc-openapi.version>2.8.5</springdoc-openapi.version>
@@ -188,12 +188,7 @@
             <dependency>
                 <groupId>org.springframework.shell</groupId>
                 <artifactId>spring-shell-starter</artifactId>
-                <version>${spring-shell.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.shell</groupId>
-                <artifactId>spring-shell-jline</artifactId>
-                <version>${spring-shell.version}</version>
+                <version>${spring-shell-starter.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.jline</groupId>
