@@ -195,6 +195,13 @@
                 <artifactId>jline</artifactId>
                 <version>${jline.version}</version>
             </dependency>
+            <!-- Spring Shell also uses separate JLine modules; managing the aggregate
+                 artifact alone does not patch jline-builtins (GHSA-r2xf-8xr9-62gw). -->
+            <dependency>
+                <groupId>org.jline</groupId>
+                <artifactId>jline-builtins</artifactId>
+                <version>${jline.version}</version>
+            </dependency>
 
             <!-- Kotlin Coroutines BOM -->
             <dependency>
