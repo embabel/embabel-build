@@ -19,48 +19,51 @@ on:
 jobs:
   check-recovery:
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
     outputs:
       is-recovery: ${{ steps.check.outputs.is-recovery }}
     steps:
       - name: Check if previous build failed
         id: check
         uses: actions/github-script@v9
+        env:
+          CALLER_RUN_ID: ${{ inputs.caller_run_id }}
+          BRANCH: ${{ inputs.branch }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            // Use the caller's run_id (passed explicitly) to resolve the correct
-            // repo and workflow — context.runId here would point at the reusable
-            // workflow's own run, not the caller's build run
-            const callerRunId = parseInt('${{ inputs.caller_run_id }}');
+            const callerRunId = Number(process.env.CALLER_RUN_ID);
+            const run = { ...context.repo, run_id: callerRunId };
 
-            const currentRun = await github.rest.actions.getWorkflowRun({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              run_id: callerRunId
-            });
+            // A rerun keeps its run ID; check its earlier attempts first.
+            for (let attempt = context.runAttempt - 1; attempt >= 1; attempt--) {
+              const { data } = await github.rest.actions.getWorkflowRunAttempt({
+                ...run,
+                attempt_number: attempt
+              });
+              if (data.conclusion === 'failure' || data.conclusion === 'success') {
+                core.setOutput('is-recovery', String(data.conclusion === 'failure'));
+                return;
+              }
+            }
 
-            const workflowId = currentRun.data.workflow_id;
-            const callerRepo = currentRun.data.repository.full_name;
-            console.log(`Caller repo: ${callerRepo}, workflow_id: ${workflowId}`);
-
-            const [owner, repo] = callerRepo.split('/');
-
-            const runs = await github.rest.actions.listWorkflowRuns({
-              owner,
-              repo,
-              workflow_id: workflowId,
-              branch: '${{ inputs.branch }}',
+            const { data: currentRun } = await github.rest.actions.getWorkflowRun(run);
+            for await (const { data: runs } of github.paginate.iterator(github.rest.actions.listWorkflowRuns, {
+              ...context.repo,
+              workflow_id: currentRun.workflow_id,
+              branch: process.env.BRANCH,
               exclude_pull_requests: true,
-              per_page: 5
-            });
-
-            const previousRun = runs.data.workflow_runs
-              .filter(run => run.id !== callerRunId && run.status === 'completed')
-              .at(0);
-
-            const wasFailure = previousRun?.conclusion === 'failure';
-            console.log(`Previous run conclusion: ${previousRun?.conclusion ?? 'none found'}`);
-            core.setOutput('is-recovery', String(wasFailure));
+              per_page: 100
+            })) {
+              const previousRun = runs.find(candidate =>
+                candidate.run_number < currentRun.run_number && candidate.status === 'completed');
+              if (previousRun) {
+                core.setOutput('is-recovery', String(previousRun.conclusion === 'failure'));
+                return;
+              }
+            }
+            core.setOutput('is-recovery', 'false');
 
   notify-recovery:
     needs: [check-recovery]
