@@ -19,8 +19,6 @@ on:
 jobs:
   check-recovery:
     runs-on: ubuntu-latest
-    permissions:
-      actions: read
     outputs:
       is-recovery: ${{ steps.check.outputs.is-recovery }}
     steps:
