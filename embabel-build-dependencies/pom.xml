@@ -42,6 +42,8 @@
         <jwiki.version>1.9.0</jwiki.version>
         <!-- Template Engine -->
         <jinjava.version>2.8.3</jinjava.version>
+        <!-- GHSA-xxph-c9ww-hj94: override Jinjava's vulnerable Guava dependency. -->
+        <guava.version>33.7.2-jre</guava.version>
         <!-- JNA Platform -->
         <jna-platform.verson>5.16.0</jna-platform.verson>
         <!-- AsciiTable -->
@@ -291,6 +293,11 @@
                 <groupId>com.hubspot.jinjava</groupId>
                 <artifactId>jinjava</artifactId>
                 <version>${jinjava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
             </dependency>
 
             <!--OpenAPI -->
