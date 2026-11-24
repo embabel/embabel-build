@@ -31,8 +31,8 @@
         <apache-commons-text.version>1.10.0</apache-commons-text.version>
         <apache-commons-lang3.version>3.18.0</apache-commons-lang3.version>
         <!-- AI Frameworks -->
-        <spring-ai.version>2.0.1</spring-ai.version>
-        <mcp-sdk.version>2.0.0</mcp-sdk.version>
+        <spring-ai.version>2.0.3</spring-ai.version>
+        <mcp-sdk.version>2.1.0</mcp-sdk.version>
         <typesafe-java-sdk.version>0.2.0</typesafe-java-sdk.version>
         <victools-jsonschema.version>5.0.0</victools-jsonschema.version>
         <!-- Kotlin Coroutines -->
