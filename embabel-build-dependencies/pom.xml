@@ -84,14 +84,16 @@
         <springmockk.version>4.0.2</springmockk.version>
         <archunit.version>1.4.2</archunit.version>
         <assertj-core.version>3.27.7</assertj-core.version>
-        <!-- Spring AI 2.0.0-M8's spring-ai-openai is compiled against openai-java 4.36.0;
+        <!-- Spring AI 2.0.3's spring-ai-openai is compiled against openai-java-core 4.101.0;
              bumping the BOM in lockstep avoids ABI drift between Spring AI's transitive
-             dep and any module that pulls openai-java directly. -->
-        <openai-java.version>4.36.0</openai-java.version>
+             dep and any module that pulls openai-java directly. Bump on every spring-ai.version
+             change: embabel-agent-openai's enforcer rule fails the build when they diverge. -->
+        <openai-java.version>4.101.0</openai-java.version>
         <!-- spring-ai-anthropic depends on anthropic-java-core but not anthropic-java-client-okhttp,
              which the agent uses directly. Manage the Anthropic SDK in lockstep with the version
-             Spring AI compiles against, mirroring the openai-java handling above. -->
-        <anthropic-java.version>2.40.1</anthropic-java.version>
+             Spring AI compiles against (2.75.0 for Spring AI 2.0.3), mirroring the openai-java
+             handling above. -->
+        <anthropic-java.version>2.75.0</anthropic-java.version>
         <!-- OCI SDK for Oracle LLM Integration -->
         <oci-sdk.version>3.86.1</oci-sdk.version>
         <!-- A2A Java SDK -->
